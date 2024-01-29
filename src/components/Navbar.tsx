@@ -63,7 +63,7 @@ function Navbar({toggleTheme, setToggleTheme, setSearchText, searchText}: Props)
     return <>
         <Stack boxShadow={'rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;'} bgcolor={'rgba(234,234,234,0.07)'} padding={{xs: '0.8rem', sm: '1rem', md: '1.5rem'}} borderRadius={'4px'} my={'2rem'} direction='row' columnGap={3} justifyContent={'space-between'}>
             <Stack alignItems={'center'} direction={"row"} columnGap={2}>
-                <Avatar sx={{width: '46px', height: '42px'}} variant={'rounded'} src='src/assets/react.png'/>
+                <Avatar sx={{width: '46px', height: '42px'}} variant={'rounded'} src='dist/assets/react.png'/>
                 <Typography sx={{display: {xs: 'none', sm: 'none', md: 'inline-block'}}} fontWeight={'bold'} variant={'h4'}>Gaming Portal</Typography>
             </Stack>
             <Search searchText={searchText} setSearchText={setSearchText}>
