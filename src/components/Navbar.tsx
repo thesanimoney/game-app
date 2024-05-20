@@ -1,5 +1,6 @@
 import {Avatar, FormControlLabel, Stack, styled, Switch, Typography} from "@mui/material";
 import Search from "./Search.tsx";
+import {useNavigate} from "react-router-dom";
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
@@ -53,20 +54,20 @@ interface Theme {
     setToggleTheme: (data: boolean) => void
 }
 
-interface  Props extends Theme {
-    setSearchText: (event: string) => void,
-    searchText: string
-}
+function Navbar({toggleTheme, setToggleTheme}: Theme) {
+    const navigate = useNavigate()
 
-function Navbar({toggleTheme, setToggleTheme, setSearchText, searchText}: Props) {
-    console.log(toggleTheme)
     return <>
-        <Stack boxShadow={'rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;'} bgcolor={'rgba(234,234,234,0.07)'} padding={{xs: '0.8rem', sm: '1rem', md: '1.5rem'}} borderRadius={'4px'} my={'2rem'} direction='row' columnGap={3} justifyContent={'space-between'}>
-            <Stack alignItems={'center'} direction={"row"} columnGap={2}>
-                <Avatar sx={{width: '46px', height: '42px'}} variant={'rounded'} src='https://portfolio123222.s3.eu-central-1.amazonaws.com/react.svg'/>
-                <Typography sx={{display: {xs: 'none', sm: 'none', md: 'inline-block'}}} fontWeight={'bold'} variant={'h4'}>Gaming Portal</Typography>
+        <Stack boxShadow={'rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;'} bgcolor={'rgba(234,234,234,0.07)'}
+               padding={{xs: '0.8rem', sm: '1rem', md: '1.5rem'}}
+               borderRadius={'4px'} my={'2rem'} direction='row' columnGap={3} justifyContent={'space-between'}>
+            <Stack sx={{cursor: 'pointer'}} onClick={() => navigate('')} alignItems={'center'} direction={"row"} columnGap={2}>
+                <Avatar sx={{width: '46px', height: '42px'}} variant={'rounded'}
+                        src='https://portfolio123222.s3.eu-central-1.amazonaws.com/react.svg'/>
+                <Typography sx={{display: {xs: 'none', sm: 'none', md: 'inline-block'}}}
+                            fontWeight={'bold'} variant={'h4'}>Gaming Portal</Typography>
             </Stack>
-            <Search searchText={searchText} setSearchText={setSearchText}>
+            <Search>
             </Search>
             <FormControlLabel control={
                 <MaterialUISwitch

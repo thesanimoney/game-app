@@ -1,17 +1,19 @@
 import {Typography} from "@mui/material";
-import {Genre} from "../hooks/useGenres.tsx";
-import {Platform} from "../hooks/useGames.tsx";
+import useGenres from "../hooks/useGenres.tsx";
+import usePlatform from "../hooks/usePlatform.tsx";
+import useGameQuery from "../hooks/useGameQuery.ts";
 
-interface Props {
-    selectedGenre: Genre,
-    selectedPlatform: Platform
-}
+function DynamicText() {
+    const {gameQuery} = useGameQuery()
 
-function DynamicText({selectedGenre, selectedPlatform}: Props) {
-    console.log(selectedPlatform)
+    const {data: genres} = useGenres()
+    const {data: platforms} = usePlatform()
+
+    const selectedPlatform = platforms?.results.find(el => gameQuery.parent_platforms === el.id)
+    const selectedGenre = genres?.results.find(el => gameQuery.genresId === el.id)
 
     return <>
-        <Typography sx={{fontWeight: 'bolder'}} variant={'h4'}>
+        <Typography sx={{fontWeight: 'bolder'}} variant={'h2'}>
             {selectedPlatform ? selectedPlatform.name : ''}  {selectedGenre ? selectedGenre.name : ''} Games</Typography>
     </>
 }

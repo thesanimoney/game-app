@@ -1,10 +1,10 @@
-import { Platform } from '../hooks/useGames.tsx';
 import { FaLinux, FaWindows, FaApple, FaPlaystation, FaXbox } from "react-icons/fa";
 import { SiNintendo } from "react-icons/si";
 import { MdPhoneIphone } from "react-icons/md";
 import { BsGlobe } from "react-icons/bs";
 import {Avatar, AvatarGroup} from "@mui/material";
 import {ReactElement} from "react";
+import {Platform} from "../hooks/usePlatform.tsx";
 
 interface Platforms {
     platforms: Platform[];
@@ -27,7 +27,12 @@ function PlatformIcon({ platforms }: Platforms) {
         <>
             <AvatarGroup max={4}>
             {platforms.map((el) => (
-                <Avatar key={el.id}>{mapIcons[el.slug]}</Avatar>
+                <Avatar sx={{
+                    '&:hover': {
+                        // your hover styles here
+                        color: 'lightgrey', // for example
+                    },
+                }} key={el.id}>{mapIcons[el.slug]}</Avatar>
             ))}
             </AvatarGroup>
         </>

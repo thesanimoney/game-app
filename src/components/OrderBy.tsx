@@ -3,14 +3,11 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, {SelectChangeEvent} from '@mui/material/Select';
-import {GameQuery} from "../App.tsx";
+import useStoreGameQuery from "../hooks/useGameQuery.ts";
 
-interface Props {
-    setOrder: (order: string) => void
-    selectedOrder: GameQuery
-}
+export default function OrderBy() {
+    const {setSortOrder, gameQuery} = useStoreGameQuery()
 
-export default function OrderBy({setOrder, selectedOrder}: Props) {
     const typesOfOrders = [
         {value: '', label: 'Relevance'},
         {value: '-added', label: 'Date added'},
@@ -20,7 +17,7 @@ export default function OrderBy({setOrder, selectedOrder}: Props) {
     ]
 
     const handleChange = (event: SelectChangeEvent) => {
-        setOrder(event.target.value);
+        setSortOrder(event.target.value);
     };
 
     return (
@@ -30,7 +27,7 @@ export default function OrderBy({setOrder, selectedOrder}: Props) {
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={selectedOrder.order || ''}
+                    value={gameQuery.order || ''}
                     label="Age"
                     onChange={handleChange}
                 >

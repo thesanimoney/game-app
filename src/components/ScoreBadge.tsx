@@ -9,7 +9,10 @@ function ScoreBadge({metacritic}: Props) {
     const color = metacritic > 80 ? 'success' : metacritic > 60 ? 'warning' : 'error'
 
     return <>
-        <Chip sx={{borderRadius: '15px'}} label={metacritic} color={color} icon={<StarIcon color={color}/>}/>
+        <Chip sx={{borderRadius: '15px', '&:hover': {
+                // your hover styles here
+                color: 'lightgrey', // for example
+            }}} label={metacritic} color={color} icon={<StarIcon color={color}/>}/>
     </>
 }
 

@@ -3,27 +3,15 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import usePlatform from "../hooks/usePlatform.tsx";
-import { Platform } from "../hooks/useGames.tsx";
+import useGameQuery from "../hooks/useGameQuery.ts";
 
-interface Props {
-    setPlatform: (id: number, name: string) => void,
-    selectedPlatform: Platform
-}
 
-export default function PlatformSelector({ setPlatform, selectedPlatform }: Props) {
+export default function PlatformSelector() {
     const { data, error } = usePlatform();
+    const {setPlatformId, gameQuery} = useGameQuery()
 
     const handleChange = (event: SelectChangeEvent) => {
-        const selectedId = parseInt(event.target.value, 10);
-
-        if (selectedId) {
-            const selectedPlatform = data.find(el => el.id === selectedId);
-
-            selectedPlatform && setPlatform(selectedPlatform.id, selectedPlatform.name);
-        } else {
-            // Handle the case when "All Platforms" is selected
-            setPlatform(0, ''); // You can use 0 or any other value for the "All Platforms" option
-        }
+        setPlatformId(parseInt(event.target.value))
     };
 
     return (
@@ -34,11 +22,10 @@ export default function PlatformSelector({ setPlatform, selectedPlatform }: Prop
                 id="demo-select-small"
                 label="Platform"
                 onChange={handleChange}
-                value={selectedPlatform ? selectedPlatform?.id.toString(10) : ''}
+                value={gameQuery.parent_platforms?.toString() || ''}
             >
                 {error && <MenuItem>{error.message}</MenuItem>}
-                <MenuItem value={''}>All Platforms</MenuItem>
-                {data.map(el => (
+                {data?.results.map(el => (
                     <MenuItem key={el.id} value={el.id}>
                         {el.name}
                     </MenuItem>
